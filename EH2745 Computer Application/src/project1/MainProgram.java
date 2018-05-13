@@ -1065,7 +1065,8 @@ public class MainProgram {
 		
 	for (int i=0; i<BusBarSectionList.size(); i++) {
 		for (int j=0; j<BusBarSectionList.size(); j++) {
-				
+		
+		System.out.println("Admittance from bus to bus");
 		System.out.println((Ybus[i][j]).StringForm((Ybus[i][j]))+"\t");
 				}
 		System.out.println("\t");
