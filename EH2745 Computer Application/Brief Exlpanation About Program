@@ -1,0 +1,12 @@
+Brief explanation about the program
+
+1.	We created several classes for this program, there are two main classes, with GUI and without GUI, most of the other class are made because we want to store different type of elements is same array, for example in Base Voltage elements we want to store information of its rdfID (String) and nominal value (double). The other class are related to publishing the data to mySQL, complex number transform and calculation.
+2.	In the main program:
+    a.	We  parse the documents,
+    b.	We get the specified parameters we want to use, and store it to array list with specified types
+    c.	We activitate method to create database, and also we use method that we have created from “createdatabase”c class to publish the parameters by calling it from array list to mySQL database
+    d.	We define YBUS matrix
+    e.	We find corresponding bus bar number of AClines, transformer, and shunt compensator and add their value to their corresponding Ybus matrix elements.
+3.	We add commends in the code and in videos for more detail explanation
+4.	The program will shows user interface and shows YBUS matrix in table if it is run from “GUINEW” Class 
+
