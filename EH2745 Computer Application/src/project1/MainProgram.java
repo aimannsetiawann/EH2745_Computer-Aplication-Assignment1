@@ -20,7 +20,7 @@ import java.awt.Font;
 public class MainProgram {
 	
 
-	static final double SystembasePower = 650;
+	static final double SystembasePower = 1000;
 	public static void main (String[] args){
 		
 		try {	
@@ -793,6 +793,8 @@ public class MainProgram {
 			
 			}
 		
+		
+		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 ////////////////////////////////////////////Y-BUS MATRIX CALCULATION/////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -808,13 +810,13 @@ public class MainProgram {
 // Basically we review each elements and find its corresponding bus. For example, AC Line 1 has corresponding buses with number of 1 and 2, the Y[1][2] and Y[2][1] value will equal to the line admittance, and the value also be updated to Y[1][1] and Y[2][2]
 	
 		final int size=BusBarSectionList.size();
-		final Complexnumber zero = new Complexnumber(0,0);			
+		final Complexnumber initialvalue = new Complexnumber(0,0);			
 		final Complexnumber Ybus[][] = new Complexnumber[size][size];
 		
 		for (int i=0; i<BusBarSectionList.size(); i++) {
 			for (int j=0; j<BusBarSectionList.size(); j++) {
 				
-				Ybus[i][j]=zero;
+				Ybus[i][j]=initialvalue;
 			}		
 		}
 		
@@ -1062,7 +1064,15 @@ public class MainProgram {
 			
 				Ybus[LineBusI][LineBusI]=(Ybus[LineBusI][LineBusI]).plus((Ybus[LineBusI][LineBusI]),Ysh);
 		}
+	
+		// To Ybus Matrix GUI
 		
+	System.out.println("///////////////////////////////////////////////////////////////");	
+	System.out.println("/////////////////////Y BUS MATRIX ELEMENTS/////////////////////");
+	System.out.println("///////////////////////////////////////////////////////////////");
+	System.out.println(" ");
+	
+	final String YbusString[][] = null;
 	for (int i=0; i<BusBarSectionList.size(); i++) {
 		for (int j=0; j<BusBarSectionList.size(); j++) {
 		
@@ -1076,7 +1086,15 @@ public class MainProgram {
 				}
 		System.out.println("\t");
 		}
+	System.out.println("///////////////////////////////////////////////////////////////");	
+	System.out.println("/////////////////////Y BUS MATRIX ELEMENTS/////////////////////");
+	System.out.println("/////////////////////////////////////////////////////////////// ");
 		
+		
+		
+	
+		
+	
 		}
 	
 catch (Exception e) {

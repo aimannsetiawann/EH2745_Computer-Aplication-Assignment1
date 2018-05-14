@@ -10,9 +10,10 @@ public class CreateDatabase {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/";
 	
+	String sql = null; // A variable which is used to store mySQL command in string
 	Connection conn = null;
     Statement stmt = null;
-    String sql = null; // A variable which is used to store mySQL command in string
+    
 
     // With this method we create data base in mySQL with specified username and password
 	public CreateDatabase (String USERNAME,String PASS ) {
@@ -41,8 +42,8 @@ public class CreateDatabase {
 			
 		}
 		
-	    catch(SQLException se){
-		se.printStackTrace();
+	    catch(SQLException eq){
+		eq.printStackTrace();
 		}
 	    catch(Exception e){
 		e.printStackTrace();
@@ -141,12 +142,12 @@ try {
 	// In this section we create different methods to insert the parsed data to specified table
 	// Since there are 14 different data class there are 14 methods to insert the data to their corresponding table
 	
-	// There are three steps to insert the data into their corresponding table
+	// There are some steps to insert the data into their corresponding table
 		//1. Creating query command to insert values to specified table for example "INSERT INTO BaseVoltage VALUES(?,?)", it means inserting two values to table called "BaseVoltage"
 		//2. prepare statement to execute query
 		//3. Specified the first value with its type
 		//4. Specified the n value with its type
-		//5. Execute the command
+		//5. Execute the query
 	
 	// This is a method for creating table for Base Voltage data
 	// The method has input of Base Voltage RDFID and nominal value (kV)
@@ -161,11 +162,8 @@ try {
 			
 			System.out.println("Create data to BaseVoltage Table successfully...");
 		   }
-		catch(SQLException se){
-
-		se.printStackTrace();}
+		
 		catch(Exception e){
-
 		e.printStackTrace();}			
 		}
 
@@ -183,13 +181,9 @@ try {
 			
 			System.out.println("Create data to Substation Table successfully...");
 		   }
-		catch(SQLException se){
-	
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for Substation data
 	// The method has input of substation rdfID, name, and region
@@ -206,13 +200,9 @@ try {
 			
 			System.out.println("Create data to Voltage Level Table successfully...");
 		   }
-		catch(SQLException se){
-	   
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for Generating Unit data
 	// The method has input of generating unit rdfID, name, maximum and minimum power, and equipment container ID
@@ -231,13 +221,9 @@ try {
 			System.out.println("Create data to Generating UnitTable successfully...");
 			
 		   }
-		catch(SQLException se){
-	    
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for Synchronous Machine data
 	// The method has input of Synchronous Machine rdfID, name, base power rating, active power, reactive power, generating unit rdfID, regulating control rdfID, and base votage rdfID
@@ -259,13 +245,9 @@ try {
 			
 			System.out.println("Create data to Synchronous Machine Table successfully...");
 		   }
-		catch(SQLException se){
-	    
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for regulating control data
 	// The method has input of regulating control  rdfID, name, and target value
@@ -284,13 +266,9 @@ try {
 			System.out.println("Create data to Regulating Control Table successfully...");
 			
 		   }
-		catch(SQLException se){
-	
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for transformer data
 	// The method has input of transformer  rdfID, name, and equipment container
@@ -309,13 +287,9 @@ try {
 			System.out.println("Create data to Power Transformer Table successfully...");
 			
 		   }
-		catch(SQLException se){
-	    
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for energy consumer data
 	// The method has input of energy consumer  rdfID, name, active power, reactive power, equipment container rdfID, and base voltage rdfID
@@ -335,13 +309,9 @@ try {
 			System.out.println("Create data to Energy Consumer Table successfully...");
 			
 		   }
-		catch(SQLException se){
-	    
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for transformer end data
 	// The method has input of transformer end  rdfID, name, impedance data, transformer rdfID, and base voltage rdfID
@@ -361,13 +331,9 @@ try {
 			System.out.println("Create data to Power Transformer Windings Table successfully...");
 			
 		   }
-		catch(SQLException se){
-	    
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
+			e.printStackTrace();}			
+			}
 	
 	// This is a method for creating table for transformer end data
 	// The method has input of transformer end  rdfID, name, impedance data, transformer rdfID, and base voltage rdfID
@@ -388,11 +354,7 @@ try {
 			System.out.println("Create data to Circuit Breaker Table successfully...");
 			
 		   }
-		catch(SQLException se){
-		    
-			se.printStackTrace();}
-			catch(Exception e){
-			
+		catch(Exception e){
 			e.printStackTrace();}			
 			}
 	
@@ -413,16 +375,9 @@ try {
 			System.out.println("Create data to Ratio Tap Changer Table successfully...");
 			
 		   }
-		catch(SQLException se){
-	   
-		se.printStackTrace();}
 		catch(Exception e){
-		
-		e.printStackTrace();}			
-		}
-
-
-	
+			e.printStackTrace();}			
+			}
 }
 	
 
