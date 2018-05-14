@@ -2,14 +2,17 @@ package project1;
 
 public class Complexnumber {
 
-	private double real;
-	private double imag;
+	// In this class we created method to convert two numbers (real part and imaginary part) to complex number
+	private double real; //
+	private double imag; 
 	
-	public Complexnumber (double Re, double Im) {
-		
+	public Complexnumber (double Re, double Im) {// method for complex number with input of real part and imaginary part of value  
+												// For example for admittance, the conductance (B) value is real part and susseptance value (G) is the imaginary part
 		this.real=Re;
 		this.imag=Im;
 		}
+	
+	// In this assignment we only use additional, substract, multiply by constant, resiprocal, devide by constant function for complex number because these are the only function we need to calculate the total admittances
 	
 	public Complexnumber plus (Complexnumber a, Complexnumber b){
 		double real = a.real + b.real;
@@ -58,7 +61,7 @@ public class Complexnumber {
     	return new Complexnumber(real, imag);
         
     }
-    
+    // Shows the output of complex number to string form of complex number (real + imag i)
 	public String StringForm(Complexnumber a) 
 	{
 	       if (a.imag == 0) return real + "";

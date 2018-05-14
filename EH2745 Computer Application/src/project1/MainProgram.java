@@ -619,7 +619,7 @@ public class MainProgram {
 		Element BusBarEC= (Element) BusBarECList.item(0);
 		String ECrdfID= BusBarEC.getAttribute("rdf:resource").replace("#","");
     
-		ArrayList<Integer> BusBarConnectivityNodeNum = new ArrayList<Integer>();
+		ArrayList<Integer> BusBarConnectivityNodeNum = new ArrayList<Integer>();// Arraylist to store some connectivity numbers coresponding to the bus bar
     
 		for (int j = 0; j < ConnectivityNList.size() ; j++){
     	
@@ -685,9 +685,9 @@ public class MainProgram {
 		
 		// Extracting data from array list and store it to sql database
 		for (int i=0; i<BaseVoltage.size(); i++) {
-			String rdfID = BaseVoltage.get(i).GetrdfID();
+			String rdfID = BaseVoltage.get(i).GetrdfID();// Store it to variable
 			double Value = BaseVoltage.get(i).GetBV();
-			mySQL.TableBV(rdfID, Value);
+			mySQL.TableBV(rdfID, Value);// calling the method to create table
 			}
 		
 		for (int i=0; i<SubstationList.size(); i++) {
@@ -809,9 +809,12 @@ public class MainProgram {
 		
 // Basically we review each elements and find its corresponding bus. For example, AC Line 1 has corresponding buses with number of 1 and 2, the Y[1][2] and Y[2][1] value will equal to the line admittance, and the value also be updated to Y[1][1] and Y[2][2]
 	
+		// We determine the size of YBus matrix which dimension will be equal to number of busbar^2 
+		
 		final int size=BusBarSectionList.size();
-		final Complexnumber initialvalue = new Complexnumber(0,0);			
-		final Complexnumber Ybus[][] = new Complexnumber[size][size];
+		final Complexnumber initialvalue = new Complexnumber(0,0);		
+		final Complexnumber Ybus[][] = new Complexnumber[size][size]; // Set initial value of zero to all matrix elemente
+		
 		
 		for (int i=0; i<BusBarSectionList.size(); i++) {
 			for (int j=0; j<BusBarSectionList.size(); j++) {
@@ -822,18 +825,22 @@ public class MainProgram {
 		
 		for (int i=0; i<ACLineList.size(); i++) {	
 			
-			String Flagbr1= "false";
+			String Flagbr1= "false";// Flag to check breaker state, since one line can be placed between two breakers we create two different flag for two different breaker
 			String Flagbr2= "false";
 			
+			//Calling line admittance and shunt admittance
 			Complexnumber Yline=ACLineList.get(i).GetY();
 			Complexnumber Yshline=ACLineList.get(i).GetYsh();
 			
+			// Initialize corresponding bus number of the line
 			int LineBusI=0;
 			int LineBusJ=0;
 			
+			// Initialize connectivity node number of busbar which connect the bus bar to the lines
 			int a=0;
 			int b=0;
 			
+			// Calling Line connectivity nodes
 			int LineCN1=ACLineList.get(i).GetCN1();
 			int LineCN2=ACLineList.get(i).GetCN2();
 			
@@ -850,11 +857,11 @@ public class MainProgram {
 						a=CircuitBreakerList.get(j).GetCN1();
 					} 
 					
-					else {
+					else {// If there is no breaker which is connected we made decision that the corresponding connectivity node of line is directly connected to bus bar 
 						a=LineCN1;
 					}
 					
-					if ((BreakerCN1==LineCN1)||(BreakerCN2==LineCN1)) {
+					if ((BreakerCN1==LineCN1)||(BreakerCN2==LineCN1)) {// Checking breaker state
 					
 						String br=CircuitBreakerList.get(j).GetState();
 						
@@ -901,6 +908,7 @@ public class MainProgram {
 					}	
 			}
 			
+			// Getting bus bar number of which is associated with first connectivity node of line
 			for (int k=0; k<BusBarSectionList.size(); k++) {
 				
 				for (int K=0; K<BusBarSectionList.get(k).GetList().size(); K++) {
@@ -915,6 +923,7 @@ public class MainProgram {
 				
 			}
 			
+			// Getting bus bar number of which is associated with second connectivity node of line
 			for (int m=0; m<BusBarSectionList.size(); m++) {
 				
 				for (int M=0; M<BusBarSectionList.get(m).GetList().size(); M++) {
@@ -927,7 +936,8 @@ public class MainProgram {
 				}				
 			}
 			
-			
+			// Flag checking, which means if the condition is accepted (both breaker closed) the the admittances value of lines can be updated to its corresponding Ybus matrix elements
+						// If there is no breaker, the flag wont be changed, so the admittance value of Y bus matrix elements can still be updated
 			if ((Flagbr1.equals("false") && Flagbr2.equals("false")) );
 			{
 				Ybus[LineBusI][LineBusI]=(Ybus[LineBusI][LineBusI]).plus((Ybus[LineBusI][LineBusI]), (Yline.plus(Yline, Yshline)));
@@ -937,6 +947,8 @@ public class MainProgram {
 			}
 		}
 		
+		
+		// We did exactly same way with how we did with line for transformer
 		for (int i=0; i<PowerTransformerList.size(); i++) {	
 		
 			String Flagbr1= "false";
